@@ -29,7 +29,12 @@ if (( ${+functions[git-info]} )); then
   add-zsh-hook precmd git-info
 fi
 
+KUBECTL_CONFIG_FILE=${HOME}/.kube/config
+if [ -f "${KUBECTL_CONFIG_FILE}" ]; then
+  KUBECTL_INFO=" %B%F{blue}⎈  "$(sed '/current-context:/!d;s/^[^:]*:[\t ]\{0,\}\(.*\)/\1/' ${KUBECTL_CONFIG_FILE})"%b%f"
+fi
+
 PS1='
-%(3L.%B%F{yellow}(%L)%f%b .)%(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}
+%(3L.%B%F{yellow}(%L)%f%b .)%(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}${KUBECTL_INFO}
 %B%(1j.%F{blue}*%f .)%(?.%F{green}.%F{red}%? )%#%f%b '
 unset RPS1
