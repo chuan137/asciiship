@@ -35,6 +35,6 @@ if [ -f "${KUBECTL_CONFIG_FILE}" ]; then
 fi
 
 PS1='
-%(3L.%B%F{yellow}(%L)%f%b .)%(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${duration_info}${KUBECTL_INFO}
+%(3L.%B%F{yellow}(%L)%f%b .)%(!.%B%F{red}%n%f%b in .${SSH_TTY:+"%B%F{yellow}%n%f%b in "})${SSH_TTY:+"%B%F{green}%m%f%b in "}%B%F{cyan}%~%f%b${(e)git_info[prompt]}${VIRTUAL_ENV:+" via %B%F{yellow}${VIRTUAL_ENV:t}%b%f"}${CCLOUD_PROMPT_ESCAPED_ZSH:+" ${CCLOUD_PROMPT_ESCAPED_ZSH}"}${duration_info}
 %B%(1j.%F{blue}*%f .)%(?.%F{green}.%F{red}%? )%#%f%b '
 unset RPS1
